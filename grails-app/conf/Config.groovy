@@ -128,7 +128,6 @@ grails {
     }
 }
 
-
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'security.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'security.UserRole'
@@ -144,6 +143,14 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':        ['permitAll'],
 	'/**/css/**':       ['permitAll'],
 	'/**/images/**':    ['permitAll'],
-	'/**/favicon.ico':  ['permitAll']
+	'/**/favicon.ico':  ['permitAll'],
+    '/userProfile/create':  ['ROLE_ADMIN','ROLE_USER'],
+    '/userProfile/save':    ['ROLE_ADMIN','ROLE_USER'],
+    '/userProfile/edit':    ['ROLE_ADMIN','ROLE_USER'],
+    '/userProfile/show':    ['ROLE_ADMIN','ROLE_USER'],
+    '/userProfile/delete':  ['ROLE_ADMIN','ROLE_USER'],
+    '/userProfile/index':   ['ROLE_ADMIN','ROLE_USER'],
+    '/userProfile/update':  ['ROLE_ADMIN','ROLE_USER'],
+    '/books/create': ['ROLE_ADMIN','ROLE_USER']
 ]
 

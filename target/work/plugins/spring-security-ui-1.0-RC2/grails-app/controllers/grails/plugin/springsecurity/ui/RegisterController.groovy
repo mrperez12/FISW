@@ -18,7 +18,7 @@ import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource
 import groovy.text.SimpleTemplateEngine
 import grails.plugin.springsecurity.annotation.Secured
-@Secured(['ROLE_ADMIN'])
+@Secured(['ROLE_ADMIN','ROLE_USER'])
 /**
  * @author <a href='mailto:burt@burtbeckwith.com'>Burt Beckwith</a>
  */

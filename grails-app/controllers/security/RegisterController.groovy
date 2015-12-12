@@ -3,7 +3,9 @@ package security
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.ui.RegistrationCode
 import grails.plugin.springsecurity.annotation.Secured
-@Secured(['ROLE_ADMIN'])
+import user.UserProfile
+
+@Secured(['ROLE_ADMIN','ROLE_USER'])
 class RegisterController extends grails.plugin.springsecurity.ui.RegisterController {
     def verifyRegistration() {
 
@@ -27,6 +29,7 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
             if (!user) {
                 return
             }
+            def usuarioPerfil = new UserProfile(user.name,user.lastName).Save
             user.accountLocked = false
             user.save(flush:true)
             def UserRole = lookupUserRoleClass()

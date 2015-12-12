@@ -5,9 +5,9 @@
 		<title>Labmmba</title>
 		<style type="text/css" media="screen">
 			#status {
-				background-color: #eee;
+				background-color: #eeeeee;
 				border: .2em solid #fff;
-				margin: 2em 2em 1em;
+				margin: 2em 2em 3em;
 				padding: 1em;
 				width: 12em;
 				float: left;
@@ -41,6 +41,9 @@
 			}
 
 			#page-body {
+                background-color: #eeeeee;
+                border-style: solid;
+                border-color: #9B9B9B;
 				margin: 2em 1em 1.25em 18em;
 			}
 
@@ -97,7 +100,7 @@
 			</ul>
 		</div>
 		<div id="page-body" role="main">
-			<h1>Bienvenido al L.a.b.m.m.b.a</h1>
+			<h1>Bienvenido al Laboratorio de Microbiología Molecular y Biotecnología Ambiental</h1>
 			<p>Actualmente nos encontramos bajo desarrollo para poder entregarles la mejor experiencia de navegacion posible, lamentamos las molestias.</p>
 		</div>
 	</body>

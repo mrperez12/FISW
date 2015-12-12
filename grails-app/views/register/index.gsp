@@ -6,7 +6,18 @@
 </head>
 
 <body>
-
+<div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="grails_logo.png" alt="Grails"/></a>
+	<div class="nav" role="navigation">
+		<ul>
+			<sec:ifNotLoggedIn>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+			</sec:ifNotLoggedIn>
+			<sec:ifLoggedIn>
+				<li><a class="home" href="${createLink(uri: '/user')}"><g:message code="default.home.label"/></a></li>
+			</sec:ifLoggedIn>
+		</ul>
+	</div>
+</div>
 <p/>
 
 <s2ui:form width='650' height='300' elementId='loginFormContainer'
@@ -29,14 +40,13 @@
                          size='40' labelCodeDefault='Username' value="${command.username}"/>
 
 		<s2ui:textFieldRow name='email' bean="${command}" value="${command.email}"
-		                   size='40' labelCode='user.email.label' labelCodeDefault='E-mail'/>
+		                   size='40' labelCode='user.email.label' style="display: none" />
 
 		<s2ui:passwordFieldRow name='password' labelCode='user.password.label' bean="${command}"
                              size='40' labelCodeDefault='Password' value="${command.password}"/>
 
 		<s2ui:passwordFieldRow name='password2' labelCode='user.password2.label' bean="${command}"
                              size='40' labelCodeDefault='Password (again)' value="${command.password2}"/>
-
 	</tbody>
 	</table>
 

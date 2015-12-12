@@ -7,8 +7,14 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <sec:ifAnyGranted roles="ROLE_ADMIN">
+            <title><g:layoutTitle default='Menu de Administrador'/></title>
+    </sec:ifAnyGranted>
+    <sec:ifAnyGranted roles="ROLE_User">
+            <title><g:layoutTitle default='Menu de Usuario'/></title>
+    </sec:ifAnyGranted>
 
-<title><g:layoutTitle default='Menu de Administrador'/></title>
+
 
 <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon"/>
 
@@ -66,10 +72,10 @@ the explicit tags above and edit those, not the taglib code.
 
 </head>
 
-<body>
+<body bgcolor="#228b22">
 
 	<div>
-
+        <sec:ifAnyGranted roles="ROLE_ADMIN">
 		<div>
 
 			<ul class="jd_menu jd_menu_slate">
@@ -152,7 +158,7 @@ the explicit tags above and edit those, not the taglib code.
 			<div id='s2ui_header_body'>
 
 				<div id='s2ui_header_title'>
-					Spring Security Management Console
+					Menu de Administrador
 				</div>
 
 				<span id='s2ui_login_link_container'>
@@ -178,11 +184,48 @@ the explicit tags above and edit those, not the taglib code.
 			</div>
 
 		</div>
-
-		<div id="s2ui_main">
+            <div id="s2ui_main">
 			<div id="s2ui_content">
-				<s2ui:layoutResources module='spring-security-ui' />
-				<g:layoutBody/>
+            <s2ui:layoutResources module='spring-security-ui' />
+            <g:layoutBody/>
+            </div>
+            </div>
+        </sec:ifAnyGranted>
+
+        <sec:ifAnyGranted roles="ROLE_USER">
+            <ul class="jd_menu jd_menu_slate">
+				<li><g:link controller="userProfile" action="create">Crear Perfil</g:link></li>
+                <li><g:link controller="userProfile" action="show">Datos de cuenta</g:link></li>
+                <sec:ifLoggedIn>
+                    <li><a class="accessible">(<g:link controller='logout'>Logout</g:link>)</a></li>
+                </sec:ifLoggedIn>
+            </ul>
+            <div id='s2ui_header_body'>
+
+                <div id='s2ui_header_title'>
+                    Menu de Usuario
+                </div>
+
+                <span id='s2ui_login_link_container'>
+
+                    <nobr>
+                        <div id='loginLinkContainer'>
+                            <sec:ifLoggedIn>
+                                Logged in as <sec:username/>
+                            </sec:ifLoggedIn>
+                            <sec:ifSwitched>
+                                <a href='${request.contextPath}/j_spring_security_exit_user'>
+                                    Resume as <sec:switchedUserOriginalUsername/>
+                                </a>
+                            </sec:ifSwitched>
+                        </div>
+                    </nobr>
+
+                </span>
+            </div>
+        </sec:ifAnyGranted>
+
+
 <%--
 <g:javascript src='jquery/jquery.jgrowl.js' plugin='spring-security-ui'/>
 <g:javascript src='jquery/jquery.checkbox.js' plugin='spring-security-ui'/>
@@ -193,8 +236,6 @@ the explicit tags above and edit those, not the taglib code.
 <g:javascript src='jquery/jquery.dataTables.min.js' plugin='spring-security-ui'/>
 <g:javascript src='spring-security-ui.js' plugin='spring-security-ui'/>
 --%>
-			</div>
-		</div>
 
 	</div>
 

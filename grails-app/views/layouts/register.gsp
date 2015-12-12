@@ -32,7 +32,11 @@ the explicit tags above and edit those, not the taglib code.
 --%>
 
 <g:layoutHead/>
-
+    <style>
+    body {
+        background-color: #abbf78;
+    }
+    </style>
 </head>
 
 <body>

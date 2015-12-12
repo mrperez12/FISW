@@ -30,12 +30,12 @@ class UserController extends AbstractS2UiController {
 	def mailService
 	def saltSource
 	def userCache
-	@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+	@Secured(['ROLE_ADMIN'])
 	def create() {
 		def user = lookupUserClass().newInstance(params)
 		[user: user, authorityList: sortedRoles()]
 	}
-	@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+	@Secured(['ROLE_ADMIN'])
 	def save() {
 		def user = lookupUserClass().newInstance(params)
 		if (params.password) {
@@ -57,7 +57,7 @@ class UserController extends AbstractS2UiController {
 		flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])}"
 		redirect action: 'edit', id: user.id
 	}
-
+    @Secured(['ROLE_ADMIN'])
 	def edit() {
 		String usernameFieldName = SpringSecurityUtils.securityConfig.userLookup.usernamePropertyName
 
@@ -67,7 +67,7 @@ class UserController extends AbstractS2UiController {
 
 		return buildUserModel(user)
 	}
-
+    @Secured(['ROLE_ADMIN'])
 	def update() {
 		String passwordFieldName = SpringSecurityUtils.securityConfig.userLookup.passwordPropertyName
 
@@ -97,7 +97,7 @@ class UserController extends AbstractS2UiController {
 		flash.message = "${message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])}"
 		redirect action: 'edit', id: user.id
 	}
-
+    @Secured(['ROLE_ADMIN'])
 	def delete() {
 		def user = findById()
 		if (!user) return
@@ -115,11 +115,11 @@ class UserController extends AbstractS2UiController {
 			redirect action: 'edit', id: params.id
 		}
 	}
-
+    @Secured(['ROLE_ADMIN'])
 	def search() {
 		[enabled: 0, accountExpired: 0, accountLocked: 0, passwordExpired: 0]
 	}
-
+    @Secured(['ROLE_ADMIN'])
 	def userSearch() {
 
 		boolean useOffset = params.containsKey('offset')
@@ -182,6 +182,7 @@ class UserController extends AbstractS2UiController {
 	/**
 	 * Ajax call used by autocomplete textfield.
 	 */
+    @Secured(['ROLE_ADMIN'])
 	def ajaxUserSearch() {
 
 		def jsonData = []

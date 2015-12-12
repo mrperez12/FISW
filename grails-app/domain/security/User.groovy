@@ -1,10 +1,14 @@
 package security
 
+import user.UserProfile
+
+
 class User implements Serializable {
 
 	private static final long serialVersionUID = 1
 
 	transient springSecurityService
+    static hasOne = [userProfile: UserProfile]
 
 	String username
 	String password
@@ -55,8 +59,9 @@ class User implements Serializable {
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		username blank: false, unique: true
+		username blank: false, unique: true, email: true
 		password blank: false
+        userProfile unique: true, nullable: true
 	}
 
 	static mapping = {

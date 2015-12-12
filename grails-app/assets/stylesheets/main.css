@@ -37,7 +37,7 @@ html * {
 }
 
 body {
-	background: #ffffff;
+	background: #abbf78; /*aqui se cambia el color de fondo del index*/
 	color: #333333;
 	margin: 0 auto;
 	max-width: 960px;

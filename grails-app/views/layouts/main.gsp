@@ -18,13 +18,21 @@
 	</head>
 	<body>
 	<div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="grails_logo.png" alt="Grails"/></a>
-		<sec:ifLoggedIn>Welcome Back <sec:username/>!</sec:ifLoggedIn>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+                <sec:ifNotLoggedIn>
+					<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+				</sec:ifNotLoggedIn>
+				<sec:ifLoggedIn>
+					<li><a class="home" href="${createLink(uri: '/user')}"><g:message code="default.home.label"/></a></li>
+				</sec:ifLoggedIn>
 				<sec:ifNotLoggedIn>
+                    <li><g:link controller='register' action='index'>Registrate</g:link></li>
 					<li><g:link controller='login' action='auth'>Iniciar sesion</g:link></li>
 				</sec:ifNotLoggedIn>
+                <sec:ifLoggedIn>
+                    <li><sec:username/> (<g:link controller='logout'>Logout</g:link>)</li>
+                </sec:ifLoggedIn>
 			</ul>
 		</div></div>
 		<g:layoutBody/>
@@ -32,3 +40,4 @@
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 	</body>
 </html>
+

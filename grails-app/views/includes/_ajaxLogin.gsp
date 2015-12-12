@@ -20,7 +20,6 @@ input.login {
 
 	<g:link controller='register' action='forgotPassword'><g:message code='spring.security.ui.login.forgotPassword'/></g:link>
 	<g:link controller='register'><g:message code='spring.security.ui.login.register'/></g:link>
-
 	<input type='submit' class='s2ui_hidden_button' />
 
 	</g:form>
