@@ -166,7 +166,7 @@ the explicit tags above and edit those, not the taglib code.
 				<nobr>
 				<div id='loginLinkContainer'>
 				<sec:ifLoggedIn>
-				Logged in as <sec:username/> (<g:link controller='logout'>Logout</g:link>)
+				<b>Sesion iniciada como:</b> <sec:username/> (<g:link controller='logout'>Logout</g:link>)
 				</sec:ifLoggedIn>
 				<sec:ifNotLoggedIn>
 					<a href='#' id='loginLink'>Login</a>
@@ -194,8 +194,7 @@ the explicit tags above and edit those, not the taglib code.
 
         <sec:ifAnyGranted roles="ROLE_USER">
             <ul class="jd_menu jd_menu_slate">
-				<li><g:link controller="userProfile" action="create">Crear Perfil</g:link></li>
-                <li><g:link controller="userProfile" action="show">Datos de cuenta</g:link></li>
+                <li><g:link controller="userProfile" action="show">Perfil de Usuario</g:link></li>
                 <sec:ifLoggedIn>
                     <li><a class="accessible">(<g:link controller='logout'>Logout</g:link>)</a></li>
                 </sec:ifLoggedIn>
@@ -205,13 +204,22 @@ the explicit tags above and edit those, not the taglib code.
                 <div id='s2ui_header_title'>
                     Menu de Usuario
                 </div>
+                <TABLE border="1em">
+                  <TR>
+                      <td>Estimado Usuario: Esta es la pagina de tu cuenta, actualmente se encuentra bajo construccion y no cuenta con todas las opciones
+                  que desearamos a la fecha, pero puedes sentirte libre de revisar lo que ya se encuentra implementado.</td> </TR>
+                  <TR><td>Te recomendamos visitar tu "Perfil de usuario" en la parte superior izquierda del menu, ¡dale una mirada!. Dentro de
+                  este podras subir Proyectos, Publicaciones de Libros, tus Aportes en Revistas Cientificas, tus Tesis, entre otros.</td></TR>
+                    <tr><td>¡RECUERDA COMPLETAR TU PERFIL DE USUARIO!, asi los otros usuario podran saber un poco mas de ti.</td></tr>
+
+                </TABLE>
 
                 <span id='s2ui_login_link_container'>
 
                     <nobr>
                         <div id='loginLinkContainer'>
                             <sec:ifLoggedIn>
-                                Logged in as <sec:username/>
+                                Sesion iniciada como: <sec:username/>
                             </sec:ifLoggedIn>
                             <sec:ifSwitched>
                                 <a href='${request.contextPath}/j_spring_security_exit_user'>

@@ -40,22 +40,22 @@ if (isOpenId) {
 		<tbody>
 
 			<s2ui:textFieldRow name='username' labelCode='user.username.label' bean="${user}"
-                            labelCodeDefault='Username' value="${user?.username}"/>
+                            labelCodeDefault='Usuario' value="${user?.username}"/>
 
 			<s2ui:passwordFieldRow name='password' labelCode='user.password.label' bean="${user}"
-                                labelCodeDefault='Password' value="${user?.password}"/>
+                                labelCodeDefault='Clave' value="${user?.password}"/>
 
 			<s2ui:checkboxRow name='enabled' labelCode='user.enabled.label' bean="${user}"
-                           labelCodeDefault='Enabled' value="${user?.enabled}"/>
+                           labelCodeDefault='Habilitado' value="${user?.enabled}"/>
 
 			<s2ui:checkboxRow name='accountExpired' labelCode='user.accountExpired.label' bean="${user}"
-                           labelCodeDefault='Account Expired' value="${user?.accountExpired}"/>
+                           labelCodeDefault='Cuenta expirada' value="${user?.accountExpired}"/>
 
 			<s2ui:checkboxRow name='accountLocked' labelCode='user.accountLocked.label' bean="${user}"
-                           labelCodeDefault='Account Locked' value="${user?.accountLocked}"/>
+                           labelCodeDefault='Cuenta bloqueada' value="${user?.accountLocked}"/>
 
 			<s2ui:checkboxRow name='passwordExpired' labelCode='user.passwordExpired.label' bean="${user}"
-                           labelCodeDefault='Password Expired' value="${user?.passwordExpired}"/>
+                           labelCodeDefault='Clave expirada' value="${user?.passwordExpired}"/>
 		</tbody>
 		</table>
 	</s2ui:tab>

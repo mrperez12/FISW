@@ -28,6 +28,22 @@
 	<g:textField name="studiesPre" value="${userProfileInstance?.studiesPre}"/>
 
 </div>
+<div class="fieldcontain ${hasErrors(bean: userProfileInstance, field: 'university', 'error')} required">
+    <label for="university">
+        <g:message code="userProfile.university.label" default="Universidad:" />
+        <span class="required-indicator">*</span>
+    </label>
+    <g:textField name="university" value="${userProfileInstance?.university}"/>
+
+</div>
+<div class="fieldcontain ${hasErrors(bean: userProfileInstance, field: 'country', 'error')} required">
+    <label for="country">
+        <g:message code="userProfile.country.label" default="Pais:" />
+        <span class="required-indicator">*</span>
+    </label>
+    <g:textField name="country" value="${userProfileInstance?.country}"/>
+
+</div>
 
 <div class="fieldcontain ${hasErrors(bean: userProfileInstance, field: 'studiesPos', 'error')} ">
 	<label for="studiesPos">
@@ -35,6 +51,22 @@
 		
 	</label>
 	<g:textField name="studiesPos" value="${userProfileInstance?.studiesPos}"/>
+
+</div>
+<div class="fieldcontain ${hasErrors(bean: userProfileInstance, field: 'universityPos', 'error')} ">
+    <label for="universityPos">
+        <g:message code="userProfile.universityPos.label" default="Universidad:" />
+
+    </label>
+    <g:textField name="universityPos" value="${userProfileInstance?.universityPos}"/>
+
+</div>
+<div class="fieldcontain ${hasErrors(bean: userProfileInstance, field: 'countryPos', 'error')} ">
+    <label for="countryPos">
+        <g:message code="userProfile.countryPos.label" default="Pais:" />
+
+    </label>
+    <g:textField name="countryPos" value="${userProfileInstance?.countryPos}"/>
 
 </div>
 
@@ -53,13 +85,5 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select name="investigation" from="${userProfileInstance.constraints.investigation.inList}" required="" value="${userProfileInstance?.investigation}" valueMessagePrefix="userProfile.investigation"/>
+</div>
 
-</div>
-<div class="fieldcontain ${hasErrors(bean: userProfileInstance, field: 'user', 'error')} required" style="display: none">
-	<label for="user">
-		<g:message code="userProfile.user.label" default="User" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="user" name="user.id" from="${sec.loggedInUserInfo(field:"id")}"  required="" value="${userProfileInstance?.user?.id}" class="many-to-one"/>
-</div>
-<li><g:link controller="books" action="create">Ingresar Publicacion de Libro</g:link></li>

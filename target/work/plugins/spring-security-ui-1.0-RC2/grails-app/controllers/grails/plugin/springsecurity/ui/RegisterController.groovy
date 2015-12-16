@@ -18,6 +18,8 @@ import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource
 import groovy.text.SimpleTemplateEngine
 import grails.plugin.springsecurity.annotation.Secured
+
+
 @Secured(['ROLE_ADMIN','ROLE_USER'])
 /**
  * @author <a href='mailto:burt@burtbeckwith.com'>Burt Beckwith</a>
@@ -77,7 +79,7 @@ class RegisterController extends AbstractS2UiController {
 
 		render view: 'index', model: [emailSent: true]
 	}
-
+	@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
 	def verifyRegistration() {
 
 		def conf = SpringSecurityUtils.securityConfig
@@ -252,16 +254,23 @@ class RegisterController extends AbstractS2UiController {
 	}
 
 	static final password2Validator = { value, command ->
-		if (command.password != command.password2) {
-			return 'command.password2.error.mismatch'
-		}
-	}
+        if (command.password != command.password2) {
+            return 'command.password2.error.mismatch'
+        }
+    }
+    static final emailValidator = { value, command ->
+        if (command.username != command.email) {
+            return 'command.email.error.mismatch'
+        }
+    }
 }
-
+@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
 class RegisterCommand {
 
 	String username
 	String email
+	String nombres
+	String apellidos
 	String password
 	String password2
 
@@ -277,9 +286,10 @@ class RegisterCommand {
 				}
 			}
 		}
-		email blank: false, email: true
+        email blank: false, email: true, validator: RegisterController.emailValidator
 		password blank: false, validator: RegisterController.passwordValidator
 		password2 validator: RegisterController.password2Validator
+        username email: true
 	}
 }
 

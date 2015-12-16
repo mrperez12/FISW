@@ -4,6 +4,8 @@ package user
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
+@Secured(['ROLE_ADMIN','ROLE_USER'])
 
 @Transactional(readOnly = true)
 class UserProfileController {
@@ -67,7 +69,7 @@ class UserProfileController {
             return
         }
         log_usr.properties = params
-        log_usr.save flush:true //guardo
+        log_usr.save(flush:true) //guardo
 
         request.withFormat {
             form multipartForm {

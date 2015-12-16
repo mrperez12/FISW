@@ -20,7 +20,7 @@
 			<tbody>
 
 			<tr>
-				<td><g:message code='user.username.label' default='Username'/>:</td>
+				<td><g:message code='user.username.label' default='Usuario'/>:</td>
 				<td colspan='3'><g:textField name='username' size='50' maxlength='255' autocomplete='off' value='${username}'/></td>
 			</tr>
 			<tr>
@@ -30,25 +30,25 @@
 				<td><g:message code='spring.security.ui.search.either'/></td>
 			</tr>
 			<tr>
-				<td><g:message code='user.enabled.label' default='Enabled'/>:</td>
+				<td><g:message code='user.enabled.label' default='Habilitado'/>:</td>
 				<g:radioGroup name='enabled' labels="['','','']" values="[1,-1,0]" value='${enabled}'>
 				<td><%=it.radio%></td>
 				</g:radioGroup>
 			</tr>
 			<tr>
-				<td><g:message code='user.accountExpired.label' default='Account Expired'/>:</td>
+				<td><g:message code='user.accountExpired.label' default='Cuenta expirada'/>:</td>
 				<g:radioGroup name='accountExpired' labels="['','','']" values="[1,-1,0]" value='${accountExpired}'>
 				<td><%=it.radio%></td>
 				</g:radioGroup>
 			</tr>
 			<tr>
-				<td><g:message code='user.accountLocked.label' default='Account Locked'/>:</td>
+				<td><g:message code='user.accountLocked.label' default='Cuenta bloqueada'/>:</td>
 				<g:radioGroup name='accountLocked' labels="['','','']" values="[1,-1,0]" value='${accountLocked}'>
 				<td><%=it.radio%></td>
 				</g:radioGroup>
 			</tr>
 			<tr>
-				<td><g:message code='user.passwordExpired.label' default='Password Expired'/>:</td>
+				<td><g:message code='user.passwordExpired.label' default='Clave expirada'/>:</td>
 				<g:radioGroup name='passwordExpired' labels="['','','']" values="[1,-1,0]" value='${passwordExpired}'>
 				<td><%=it.radio%></td>
 				</g:radioGroup>
@@ -73,11 +73,11 @@ def queryParams = [username: username, enabled: enabled, accountExpired: account
 	<table>
 		<thead>
 		<tr>
-			<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" params="${queryParams}"/>
-			<g:sortableColumn property="enabled" title="${message(code: 'user.enabled.label', default: 'Enabled')}" params="${queryParams}"/>
-			<g:sortableColumn property="accountExpired" title="${message(code: 'user.accountExpired.label', default: 'Account Expired')}" params="${queryParams}"/>
-			<g:sortableColumn property="accountLocked" title="${message(code: 'user.accountLocked.label', default: 'Account Locked')}" params="${queryParams}"/>
-			<g:sortableColumn property="passwordExpired" title="${message(code: 'user.passwordExpired.label', default: 'Password Expired')}" params="${queryParams}"/>
+			<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Usuario')}" params="${queryParams}"/>
+			<g:sortableColumn property="enabled" title="${message(code: 'user.enabled.label', default: 'Habilitado')}" params="${queryParams}"/>
+			<g:sortableColumn property="accountExpired" title="${message(code: 'user.accountExpired.label', default: 'Cuenta expirada')}" params="${queryParams}"/>
+			<g:sortableColumn property="accountLocked" title="${message(code: 'user.accountLocked.label', default: 'Cuenta bloqueada')}" params="${queryParams}"/>
+			<g:sortableColumn property="passwordExpired" title="${message(code: 'user.passwordExpired.label', default: 'Clave expirada')}" params="${queryParams}"/>
 		</tr>
 		</thead>
 

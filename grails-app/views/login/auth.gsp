@@ -6,7 +6,18 @@
 </head>
 
 <body>
-
+<div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="grails_logo.png" alt="Grails"/></a>
+	<div class="nav" role="navigation">
+		<ul>
+			<sec:ifNotLoggedIn>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+			</sec:ifNotLoggedIn>
+			<sec:ifLoggedIn>
+				<li><a class="home" href="${createLink(uri: '/user')}"><g:message code="default.home.label"/></a></li>
+			</sec:ifLoggedIn>
+		</ul>
+	</div>
+</div>
 <p/>
 
 <div class="login s2ui_center ui-corner-all" style='text-align:center;'>

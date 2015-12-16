@@ -151,6 +151,22 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/userProfile/delete':  ['ROLE_ADMIN','ROLE_USER'],
     '/userProfile/index':   ['ROLE_ADMIN','ROLE_USER'],
     '/userProfile/update':  ['ROLE_ADMIN','ROLE_USER'],
-    '/books/create': ['ROLE_ADMIN','ROLE_USER']
+    '/books/create': ['ROLE_ADMIN','ROLE_USER'],
+    '/books/show': ['ROLE_ADMIN','ROLE_USER'],
+    '/books/index': ['ROLE_ADMIN','ROLE_USER'],
+    '/books/edit': ['ROLE_ADMIN','ROLE_USER'],
+    '/books/save': ['ROLE_ADMIN','ROLE_USER'],
+    '/books/upload': ['ROLE_ADMIN','ROLE_USER'],
+    '/books/list': ['ROLE_ADMIN','ROLE_USER']
 ]
-
+environments {
+    development {
+        uploadFolder = "/Users/Mario/Desktop"
+    }
+    test {
+        uploadFolder = "/Users/Mario/Desktop"
+    }
+    production {
+        uploadFolder = "/Users/Mario/Desktop"
+    }
+}

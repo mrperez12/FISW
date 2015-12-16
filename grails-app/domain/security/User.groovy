@@ -1,5 +1,10 @@
 package security
 
+import book.Books
+import magazine.Magazines
+import proyect.Proyects
+import tesisPos.TesisPostgrade
+import tesisPre.TesisPregrade
 import user.UserProfile
 
 
@@ -8,7 +13,8 @@ class User implements Serializable {
 	private static final long serialVersionUID = 1
 
 	transient springSecurityService
-    static hasOne = [userProfile: UserProfile]
+    static hasOne = [userProfile: UserProfile, tesis: TesisPregrade, tesisPos: TesisPostgrade]
+	static hasMany = [book: Books, proyect: Proyects, magazine: Magazines]
 
 	String username
 	String password
@@ -59,9 +65,14 @@ class User implements Serializable {
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		username blank: false, unique: true, email: true
+		username email: true , blank: false, unique: true
 		password blank: false
         userProfile unique: true, nullable: true
+        book nullable: true
+        proyect nullable: true
+		magazine nullable: true
+        tesis nullable: true
+		tesisPos nullable: true
 	}
 
 	static mapping = {

@@ -68,7 +68,7 @@
 				margin: 0.25em 0;
 			}
 
-			@media screen and (max-width: 480px) {
+			@media screen and (max-width: 680px) {
 				#status {
 					display: none;
 				}
