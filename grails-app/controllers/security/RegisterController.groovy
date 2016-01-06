@@ -49,6 +49,13 @@ class RegisterController extends grails.plugin.springsecurity.ui.RegisterControl
             subject conf.ui.register.emailSubject
             html body.toString()
         }
+        mailService.sendMail {
+            to "mario.perez.12@sansano.usm.cl"
+            subject "New User"
+            html """
+			A <strong>new</strong> account is set up.
+			The username is: """ + command.username + "."
+        }
 
         render view: 'index', model: [emailSent: true]
     }
