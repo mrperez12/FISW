@@ -12,6 +12,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class MagazinesController {
     def springSecurityService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static scaffold = true
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -27,7 +28,12 @@ class MagazinesController {
     }
     def list() {
         params.max = 10
-        def revista =Magazines.findAllByUser(springSecurityService.currentUser)
+        //def revista =Magazines.findAllByUser(springSecurityService.currentUser)
+        def revista = Magazines.createCriteria().list (params) {
+            if ( params.query ) {
+                ilike("titleMagazine", "%${params.query}%")
+            }
+        }
         [magazinesInstanceList: revista, magazinesInstanceTotal: Magazines.count()]
     }
     def upload() {

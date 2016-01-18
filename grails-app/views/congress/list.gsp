@@ -9,6 +9,17 @@
 <div class="content scaffold-list" role="main">
     <h1>Asistencias a Congresos </h1>
     <g:if test="${flash.message}"><div class="message" role="status">${flash.message}</div></g:if>
+    <div class="message" role="status">${flash.message}</div>
+    </g:if>
+    <fieldset class="form">
+        <g:form action="list" method="GET">
+            <div class="fieldcontain">
+                <label for="query">Search for Congresses:</label>
+                <g:textField name="query" value="${params.query}"/>
+            </div>
+        </g:form>
+    </fieldset>
+    <table>
     <table>
         <thead>
         <tr>

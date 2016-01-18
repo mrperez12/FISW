@@ -5,10 +5,11 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 @Secured(['ROLE_ADMIN','ROLE_USER'])
-
 @Transactional
 class BooksController {
     def springSecurityService
+    static scaffold = true
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -20,7 +21,13 @@ class BooksController {
     }
     def list() {
         params.max = 10
-        def libro =Books.findAllByUser(springSecurityService.currentUser)
+        //def libro =Books.findAllByUser(springSecurityService.currentUser)
+        def libro = Books.createCriteria().list (params) {
+            if ( params.query ) {
+                ilike("title", "%${params.query}%")
+            }
+        }
+
         [booksInstanceList: libro, booksInstanceTotal: Books.count()]
     }
     def upload() {

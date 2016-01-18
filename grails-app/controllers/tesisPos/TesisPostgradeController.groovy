@@ -1,7 +1,5 @@
 package tesisPos
 
-
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
@@ -12,6 +10,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class TesisPostgradeController {
     def springSecurityService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static scaffold = true
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -23,7 +22,12 @@ class TesisPostgradeController {
     }
     def list() {
         params.max = 10
-        def tesisPos =TesisPostgrade.findAllByUser(springSecurityService.currentUser)
+        //def tesisPos =TesisPostgrade.findAllByUser(springSecurityService.currentUser)
+        def tesisPos = TesisPostgrade.createCriteria().list (params) {
+            if ( params.query ) {
+                ilike("nameTesisPos", "%${params.query}%")
+            }
+        }
         [tesisPostgradeInstanceList: tesisPos, tesisPostgradeInstanceTotal: TesisPostgrade.count()]
     }
     def upload() {

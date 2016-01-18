@@ -12,10 +12,20 @@ class Magazines {
     String filename
     String fullPath
     Date uploadDate = new Date()
+    static scaffold = true
     static belongsTo = [user: User]
     static constraints = {
         filename(blank:false,nullable:false)
         fullPath(blank:false,nullable:false)
         areaMagazine inList: ['Biotecnologia Vegetal', 'Compuestos Bioactivos', 'Microbiologia', 'Biotecnologia Ambiental', 'Otros']
+    }
+
+    static searchMagazines = {
+        authorMagazine
+        titleMagazine
+        year
+        magazine
+        keywords
+        areaMagazine
     }
 }

@@ -7,11 +7,15 @@ class BootStrap {
         def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
         def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
 
+        def testProfile = new UserProfile(name: 'Lala', lastName:'Lolo', studiesPos: null,universityPos: null, countryPos: null, studiesPre: 'Dostor', university: 'Santo Pancracio', country: 'Chile', labCharge: 'Estudiante de Pregrado', investigation: 'Microbiologia')
+        def testUser = new User(username: 'asd@asd.cl', password: '1234').save()
+        testProfile.user = testUser
+        testProfile.save(flush: true)
 
-        def testUser = new User(username: 'mario.perez.12@sansano.usm.cl', password: '1234' , userProfile: new UserProfile(name: 'Mario', lastName:'Perez', studiesPos: null,universityPos: null, countryPos: null, studiesPre: 'Ing.Informatica', university: 'Santa Maria', country: 'Chile', labCharge: 'Estudiante de Pregrado', investigation: 'Microbiologia') )
-        testUser.save(flush: true)
-        def testUser2 = new User(username: 'belen.gonzalez.12@sansano.usm.cl', password: '1234' , userProfile: new UserProfile(name: null, lastName: null, studiesPos: null,universityPos: null, countryPos: null, studiesPre: null,university: 'Santa Maria', country: 'Chile', labCharge: 'Estudiante de Pregrado', investigation: 'Microbiologia') )
-        testUser2.save(flush: true)
+        def testProfile2 = new UserProfile(name: 'Asd', lastName: 'Dsa', studiesPos: null,universityPos: null, countryPos: null, studiesPre: null,university: 'Santa Maria', country: 'Chile', labCharge: 'Estudiante de Pregrado', investigation: 'Microbiologia')
+        def testUser2 = new User(username: 'dsa@dsa.cl', password: '1234').save()
+        testProfile2.user = testUser2
+        testProfile2.save(flush: true)
 
         UserRole.create testUser, adminRole, true
         UserRole.create testUser2, userRole, true

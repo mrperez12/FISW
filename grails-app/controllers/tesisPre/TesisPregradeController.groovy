@@ -23,7 +23,12 @@ class TesisPregradeController {
     }
     def list() {
         params.max = 10
-        def tesis =TesisPregrade.findAllByUser(springSecurityService.currentUser)
+        //def tesis =TesisPregrade.findAllByUser(springSecurityService.currentUser)
+        def tesis = TesisPregrade.createCriteria().list (params) {
+            if ( params.query ) {
+                ilike("nameTesis", "%${params.query}%")
+            }
+        }
         [tesisPregradeInstanceList: tesis, tesisPregradeInstanceTotal: TesisPregrade.count()]
     }
     def upload() {

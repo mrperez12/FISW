@@ -10,24 +10,36 @@ import grails.plugin.springsecurity.annotation.Secured
 @Transactional
 class CongressController {
     def springSecurityService
+    static scaffold = true
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Congress.list(params), model:[congressInstanceCount: Congress.count()]
+        respond Congress.list(params), model: [congressInstanceCount: Congress.count()]
     }
 
     def show(Congress congressInstance) {
         respond congressInstance
     }
+
     def list() {
-        params.max = 10
-        def congreso =Congress.findAllByUser(springSecurityService.currentUser)
+        params.max = Math.min(params.max ?: 10, 100)
+
+        //def congreso = Congress.findAllByUser(springSecurityService.currentUser)
+        def congreso = Congress.createCriteria().list (params) {
+            if ( params.query ) {
+                ilike("nameCongress", "%${params.query}%")
+            }
+        }
         [congressInstanceList: congreso, congressInstanceTotal: Congress.count()]
+
+
     }
+
     def upload() {
         def file = request.getFile('file')
-        if(file.empty) {
+        if (file.empty) {
             flash.message = "File cannot be empty"
         } else {
             def congressInstance = new Congress()
@@ -35,16 +47,17 @@ class CongressController {
             congressInstance.filename = file.originalFilename
             congressInstance.fullPath = grailsApplication.config.uploadFolder + congressInstance.filename
             file.transferTo(new File(congressInstance.fullPath))
-            congressInstance.user= springSecurityService.getCurrentUser()
+            congressInstance.user = springSecurityService.getCurrentUser()
             congressInstance.save()
         }
-        redirect (action:'list')
+        redirect(action: 'list')
     }
+
     def download(long id) {
         Congress congressInstance = Congress.get(id)
-        if ( congressInstance == null) {
+        if (congressInstance == null) {
             flash.message = "Document not found."
-            redirect (action:'list')
+            redirect(action: 'list')
         } else {
             response.setContentType("APPLICATION/OCTET-STREAM")
             response.setHeader("Content-Disposition", "Attachment;Filename=\"${congressInstance.filename}\"")
@@ -61,6 +74,7 @@ class CongressController {
             fileInputStream.close()
         }
     }
+
     def create() {
         respond new Congress(params)
     }
@@ -73,11 +87,11 @@ class CongressController {
         }
 
         if (congressInstance.hasErrors()) {
-            respond congressInstance.errors, view:'create'
+            respond congressInstance.errors, view: 'create'
             return
         }
 
-        congressInstance.save flush:true
+        congressInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
@@ -100,18 +114,18 @@ class CongressController {
         }
 
         if (congressInstance.hasErrors()) {
-            respond congressInstance.errors, view:'edit'
+            respond congressInstance.errors, view: 'edit'
             return
         }
 
-        congressInstance.save flush:true
+        congressInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Congress.label', default: 'Congress'), congressInstance.id])
                 redirect congressInstance
             }
-            '*'{ respond congressInstance, [status: OK] }
+            '*' { respond congressInstance, [status: OK] }
         }
     }
 
@@ -123,14 +137,14 @@ class CongressController {
             return
         }
 
-        congressInstance.delete flush:true
+        congressInstance.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Congress.label', default: 'Congress'), congressInstance.id])
-                redirect action:"list", method:"GET"
+                redirect action: "list", method: "GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -140,7 +154,7 @@ class CongressController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'congress.label', default: 'Congress'), params.id])
                 redirect action: "list", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }

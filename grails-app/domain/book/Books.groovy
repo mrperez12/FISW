@@ -11,6 +11,7 @@ class Books {
     String filename
     String fullPath
     Date uploadDate = new Date()
+    static scaffold = true
     static belongsTo = [user: User]
     static constraints = {
         author (blank:false,nullable:false)
@@ -20,6 +21,13 @@ class Books {
         editorial (blank:false,nullable:false)
         filename(blank:false,nullable:false)
         fullPath(blank:false,nullable:false)
+    }
+    static searchBooks = {
+        author
+        title
+        date
+        isbn
+        editorial
     }
 }
 
